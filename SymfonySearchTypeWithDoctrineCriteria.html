@@ -1,0 +1,19 @@
+How to build a search method for our repository with doctrine criteria.
+
+If our application does not rely on CQRS (link), we contain the read and write of our models within our repositories.
+This is when having a generic 'search' method along with the usual getById and save might come in handy.
+Usually it's not a good idea to clutter our repositories with a lot of methods for read purposes
+(eg findProductByName, getAllProductsCreatedAfter...) since our class could grow too unwieldly 
+(although this is usually a smell for CQRS). Anyway, having a generic search method is a nice way to keep our read methods
+to a minimum. 
+With Doctrine Criterias, the implementation of this method can be very simple and effective.
+
+
+
+Note that we could build our own criteria interfaces and build an adapter for the Doctrine Criterias.
+
+Our Repository Interface would end up in something like this:
+
+interface ProductRepository {
+    public function search(): array;
+}
